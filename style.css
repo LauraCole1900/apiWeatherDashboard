@@ -14,8 +14,8 @@ img {
   display: inline;
 }
 
-p {
-  font-size: 12px;
+h2 {
+  font-size: 30px;
 }
 
 th {
@@ -24,4 +24,27 @@ th {
 
 td {
   font-size: 16px;
+}
+
+.low {
+  background-color: green;
+  color: white;
+}
+
+.moderate {
+  background-color: yellow;
+}
+
+.high {
+  background-color: orange;
+}
+
+.very_high {
+  background-color: red;
+  color: white;
+}
+
+.extreme {
+  background-color: #8d31ff;
+  color: white;
 }

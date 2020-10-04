@@ -32,15 +32,21 @@
     <form id="location">
       <label for="city">City,Country:</label>
       <input type="text" id="city">
-      
+
       <!-- Submit location info and trigger AJAX call -->
       <input id="find-location" type="submit" value="Find weather">
 
-      <p>Separate city & country with a comma, with no spaces</p>
-
     </form>
 
-    <!-- forecast for last city searched -->
+    <section class="row">
+      <div class="col-12">
+        <h2>5-day forecast for your most recent search</h2>
+      </div>
+      <div id="col-12 forecast">
+        <!-- forecast for last city searched -->
+      </div>
+
+    </section>
     <!-- retrieved data here, in table form -->
     <table class="table">
       <thead>
@@ -60,7 +66,7 @@
 
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
   <script src="script.js" type="text/javascript"></script>
 </body>
