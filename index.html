@@ -1,18 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <title>Weather Dashboard</title>
 </head>
+
 <body>
-  
+  <div class="container">
+    <!-- header info -->
+    <header>
+      <div class="row">
+        <div class="col-1">
+          <img src="assets/367527 - pointy sun (64).png" alt="pointy sun icon" />
+        </div>
+        <div class="col-10">
+          <h1>Weather Dashboard</h1>
+        </div>
+        <div class="col-1">
+          <img src="assets/367519 - cloud rain raincloud (64).png" alt="rainy cloud icon" />
+        </div>
+      </div>
+    </header>
+    <!-- user input -->
+    <br />
+    <form id="location">
+      <label for="city">City,Country:</label>
+      <input type="text" id="city">
+      
+      <!-- Submit location info and trigger AJAX call -->
+      <input id="find-location" type="submit" value="Find weather">
+
+      <p>Separate city & country with a comma, with no spaces</p>
+
+    </form>
+
+    <!-- forecast for last city searched -->
+    <!-- retrieved data here, in table form -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">City</th>
+          <th scope="col">Current</th>
+          <th scope="col">Temp (°F)</th>
+          <th scope="col">% Hum</th>
+          <th scope="col">Wind (mph)</th>
+          <th scope="col">UV Index</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- insert searched info here -->
+      </tbody>
+    </table>
+
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
   <script src="script.js" type="text/javascript"></script>
 </body>
+
 </html>

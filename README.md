@@ -17,4 +17,11 @@ Scheduler with event scheduled:
 
 
 #### Link
-[jQuery workday scheduler](https://lauracole1900.github.io/jQueryWorkdayScheduler/)
+[jQuery workday scheduler](https://lauracole1900.github.io/apiWeatherDashboard/)
+
+
+
+#### Licenses
+
+Weather icons created by Joey Yakimowich-Payne
+  licensed under Creative Commons (http://creativecommons.org/licenses/by/3.0/)
