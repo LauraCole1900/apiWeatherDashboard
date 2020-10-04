@@ -7,7 +7,7 @@ $("#find-location").on("click", function (e) {
 
 
   // API query url
-  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=London,England&appid=2278d7ef6a3b88793ffca205108a944e";
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=2278d7ef6a3b88793ffca205108a944e";
 
 
 
@@ -18,15 +18,19 @@ $("#find-location").on("click", function (e) {
   $.ajax({
     url: queryURL,
     method: "GET"
-  })
-  console.log(response);
-  // .then(function (response) {
-  //   var tRow = $("<tr>");
-  //   var cityTd = $("<td>").text(response.name);
-  //   var windDiv = $(".wind").text("Wind direction = " + response.wind.deg + " Wind speed = " + response.wind.speed);
-  //   var humidityDiv = $(".humidity").text(response.main.humidity);
-  //   var tempK = response.main.temp;
-  //   var tempF = (parseFloat(tempK) - 273.15) * 1.80 + 32;
-  //   var tempDiv = $(".temp").text(tempF);
-  // })
-})
+  }).then(function (response) {
+    var tRow = $("<tr>");
+    var cityTd = $("<td>").text(response.name);
+    var currTd = $("<td>").text(response.weather.icon);
+    var tempTd = $("<td>").text(response.main.temp);
+    var humTd = $("<td>").text(response.main.humidity);
+    var windTd = $("<td>").text(response.wind.speed);
+    // var uvTd = $("<td>").text(response.);
+
+    // add data to table row
+    tRow.prepend(cityTd, currTd, tempTd, humTd, windTd, uvTd)
+
+    // add table row to table body
+    $("tbody").append(tRow);
+  });
+});
