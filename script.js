@@ -44,19 +44,21 @@ $("#find-location").on("click", function (e) {
       url: uvData,
       method: "GET"
     }).then(function (response) {
-      var uvTd = $("<td>").text(response.value);
+      var uvTd = $("<td>").text(response.value).attr("id", "uvi");
       tRow.append(uvTd)
-      if (response.value <= 2) {
+      $("#uvi").on("click", function () {
+      if (response.value < 3) {
         uvTd.addClass("low")
-      } else if (response.value > 2 && response.value <= 5) {
+      } else if (response.value >= 3 && response.value < 6) {
         uvTd.addClass("moderate")
-      } else if (response.value > 6 && response.value <= 7) {
+      } else if (response.value >= 6 && response.value < 8) {
         uvTd.addClass("high")
-      } else if (response.value > 7 && response.value <= 10) {
+      } else if (response.value >= 8 && response.value < 11) {
         uvTd.addClass("very_high")
-      } else if (response.value > 10) {
+      } else if (response.value >= 11) {
         uvTd.addClass("extreme")
       }
+    });
 
     })
   }
