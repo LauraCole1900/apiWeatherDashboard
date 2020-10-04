@@ -30,7 +30,7 @@
     <!-- user input -->
     <br />
     <form id="location">
-      <label for="city">City,Country:</label>
+      <label for="city">City, Country:</label>
       <input type="text" id="city">
 
       <!-- Submit location info and trigger AJAX call -->
@@ -48,21 +48,38 @@
 
     </section>
     <!-- retrieved data here, in table form -->
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">City</th>
-          <th scope="col">Current</th>
-          <th scope="col">Temp (°F)</th>
-          <th scope="col">% Hum</th>
-          <th scope="col">Wind (mph)</th>
-          <th scope="col">UV Index</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- insert searched info here -->
-      </tbody>
-    </table>
+    <section class="row">
+      <div class="col-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">City</th>
+              <th scope="col">Current</th>
+              <th scope="col">Temp (°F)</th>
+              <th scope="col">% Hum</th>
+              <th scope="col">Wind (mph)</th>
+              <th scope="col">UV Index*</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- insert searched info here -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="row">
+      <div class="col-12">
+        <ul class="uvInfo float-right">
+          * UV Index:
+            <li>Green = Low</li>
+            <li>Yellow = Moderate</li>
+            <li>Orange = High</li>
+            <li>Red = Very High</li>
+            <li>Violet = Extreme</li>
+          </ul>
+        </ul>
+      </div>
+    </section>
 
   </div>
 

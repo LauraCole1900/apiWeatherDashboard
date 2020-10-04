@@ -24,6 +24,11 @@ th {
 
 td {
   font-size: 16px;
+  vertical-align: middle;
+}
+
+.wIcon {
+  height: 40px;
 }
 
 .low {
@@ -47,4 +52,8 @@ td {
 .extreme {
   background-color: #8d31ff;
   color: white;
+}
+
+.uvInfo {
+  font-size: 14px;
 }

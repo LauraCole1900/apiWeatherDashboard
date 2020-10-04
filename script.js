@@ -22,8 +22,9 @@ $("#find-location").on("click", function (e) {
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-    var cityTd = $("<td>").text(response.name);
-    var weatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`)
+    var cityButton = $("<button>").text(response.name);
+    var cityTd = $("<td>").append(cityButton);
+    var weatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`).addClass("wIcon")
     var currTd = $("<td>").append(weatherIcon);
     var tempTd = $("<td>").text(response.main.temp);
     var humTd = $("<td>").text(response.main.humidity);
@@ -33,7 +34,7 @@ $("#find-location").on("click", function (e) {
     var lon = response.coord.lon;
     setTimeout(function () {
       getUv(lat, lon)
-    }, 100)
+    }, 25)
   })
 
   function getUv(lat, lon) {
