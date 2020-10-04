@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  dayjs.extend(window.dayjs_plugin_utc)
 
   // on-click event triggers AJAX call
   $("#find-location").on("click", function (e) {
@@ -77,7 +78,7 @@ $(document).ready(function () {
       });
     }
 
-    // add table row to table body
+    // append table row at the top of the table body
     $("tbody").prepend(tRow);
   });
 
@@ -93,25 +94,35 @@ $(document).ready(function () {
     }).then(function (response) {
       console.log(response);
       var cityName = $("<h2>").text(response.city.name).attr("id", "fCityName");
+      var UTCOffset = (dayjs().utcOffset(response.city.timezone / 60).format("ddd, MMM DD, YYYY, hh:mma"));
+      var lclTime = $("<h2>").text(UTCOffset);
 
       // check if the forecast city already exists
       if ($("#fCityName").length) {
         // replace cityName
         $("#fCityName").text(response.city.name);
+
+        //replace local time
+
         // replace data
 
       } else {
         // append cityName
         $("#forecast").append(cityName)
 
-        // append data, for loop (i = 7; i + 8)
+        // append local time
+        $("#localTime").append(lclTime);
+
+
+
+        // append data, use for loop (i = 7; i + 8)
       // for (i = 7; i < response.list.length; i + 8) {
       //   var fDay = $("<td>").text(response.list[i].dt_txt);
       //   var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
-      //   var fWeather = $("<td>").text(weather[0].description).append(fWeatherIcon);
-      //   var fTemp = $("<td>").text(response.list[i].main.temp);
-      //   var fHum = $("<td>").text(response.list[i].main.humidity);
-      //   var fWind = $("<td>").text(response.list[i].wind.speed);
+      //   var fWeather = $("<td>").text(weather[0].description).append(fWeatherIcon).attr("id", "forecastWeather");
+      //   var fTemp = $("<td>").text(response.list[i].main.temp).attr("id", "forecastTemp");
+      //   var fHum = $("<td>").text(response.list[i].main.humidity).attr("id", "forecastHumid");
+      //   var fWind = $("<td>").text(response.list[i].wind.speed).attr("id", "forecastWind");
       //   var tfRow = $("<tr>");
       //   tfRow.append(fDay, fWeather, fTemp, fHum, fWind);
       //   $("#tableForecast").append(tfRow);

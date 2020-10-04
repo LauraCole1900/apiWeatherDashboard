@@ -53,10 +53,6 @@ td {
   color: white;
 }
 
-.uvInfo {
+.info {
   font-size: 14px;
-}
-
-#forecast {
-  display: inline-block;
 }
