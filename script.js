@@ -95,7 +95,7 @@ $(document).ready(function () {
       console.log(response);
       var cityName = $("<h2>").text(response.city.name).attr("id", "fCityName");
       var UTCOffset = (dayjs().utcOffset(response.city.timezone / 60).format("ddd, MMM DD, YYYY, hh:mma"));
-      var lclTime = $("<h2>").text(UTCOffset);
+      var lclTime = $("<h3>").text("Local date & time: " + UTCOffset);
 
       // check if the forecast city already exists
       if ($("#fCityName").length) {
@@ -103,30 +103,32 @@ $(document).ready(function () {
         $("#fCityName").text(response.city.name);
 
         //replace local time
+        $("#localTime").text("Local date & time: " + UTCOffset);
 
         // replace data
 
       } else {
         // append cityName
-        $("#forecast").append(cityName)
+        $("#forecast").append(cityName);
 
         // append local time
         $("#localTime").append(lclTime);
 
 
 
-        // append data, use for loop (i = 7; i + 8)
-      // for (i = 7; i < response.list.length; i + 8) {
-      //   var fDay = $("<td>").text(response.list[i].dt_txt);
-      //   var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
-      //   var fWeather = $("<td>").text(weather[0].description).append(fWeatherIcon).attr("id", "forecastWeather");
-      //   var fTemp = $("<td>").text(response.list[i].main.temp).attr("id", "forecastTemp");
-      //   var fHum = $("<td>").text(response.list[i].main.humidity).attr("id", "forecastHumid");
-      //   var fWind = $("<td>").text(response.list[i].wind.speed).attr("id", "forecastWind");
-      //   var tfRow = $("<tr>");
-      //   tfRow.append(fDay, fWeather, fTemp, fHum, fWind);
-      //   $("#tableForecast").append(tfRow);
-      // }
+        // append data, use loop (i = 7; i + 8)
+        $(response.list).each(function (i) {
+          var fDay = $("<td>").text(response.list[i].dt_txt);
+          console.log(fDay);
+          // var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
+          // var fWeather = $("<td>").text(response.list[i].weather[0].description).append(fWeatherIcon).attr("id", "forecastWeather");
+          // var fTemp = $("<td>").text(response.list[i].main.temp).attr("id", "forecastTemp");
+          // var fHum = $("<td>").text(response.list[i].main.humidity).attr("id", "forecastHumid");
+          // var fWind = $("<td>").text(response.list[i].wind.speed).attr("id", "forecastWind");
+          // var tfRow = $("<tr>");
+          // tfRow.append(fDay, fWeather, fTemp, fHum, fWind);
+          // $("#tableForecast").append(tfRow);
+        })
 
       }
 
