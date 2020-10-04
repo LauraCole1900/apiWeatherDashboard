@@ -1,42 +1,48 @@
 $(document).ready(function () {
 
-  //API query url
-  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + "city-input" + "country-input" + "&appid=2278d7ef6a3b88793ffca205108a944e";
-
   // on-click event triggers AJAX call
   $("#find-location").on("click", function (e) {
     e.preventDefault();
 
 
-    // API query url
+    // set "city" variable
     var city = $("#city").val();
+
+    // callForecast() as soon as city variable is set
     callForecast(city);
 
+    // API query URL
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=2278d7ef6a3b88793ffca205108a944e";
 
+    // set table row variable
     var tRow = $("<tr>");
 
 
-    // AJAX call
-    // create table row
-    // create table cells
-    // put city, current cond, temp, humidity, wind data into table cells
-    // use weather icons for current conditions
-    // append table cells to table row
+    // AJAX call for current conditions
     $.ajax({
       url: queryURL,
       method: "GET"
     }).then(function (response) {
+
+      // create table cells
       var cityButton = $("<button>").text(response.name);
       var cityTd = $("<td>").append(cityButton);
+
+      // use weather icons for current conditions
       var weatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`).addClass("wIcon")
       var currTd = $("<td>").text(response.weather[0].description).append(weatherIcon);
       var tempTd = $("<td>").text(response.main.temp);
       var humTd = $("<td>").text(response.main.humidity);
       var windTd = $("<td>").text(response.wind.speed);
+
+      // put city, current cond, temp, humidity, wind data into table cells
       tRow.append(cityTd, currTd, tempTd, humTd, windTd)
+
+      // define latitude & longitude for UVI data
       var lat = response.coord.lat;
       var lon = response.coord.lon;
+
+      // give API time to respond so lat & lon data populates properly
       setTimeout(function () {
         getUv(lat, lon)
       }, 25)
@@ -52,7 +58,11 @@ $(document).ready(function () {
         method: "GET"
       }).then(function (response) {
         var uvTd = $("<td>").text(response.value).attr("id", "uvi");
-        tRow.append(uvTd)
+
+        // put UVI into table cell 
+        tRow.append(uvTd);
+
+        // check UVI value to determine alert color, color cell background accordingly
         if (response.value < 3) {
           uvTd.addClass("low")
         } else if (response.value >= 3 && response.value < 6) {
@@ -87,15 +97,15 @@ $(document).ready(function () {
       // check if the forecast city already exists
       if ($("#fCityName").length) {
         // replace cityName
+        $("#fCityName").text(response.city.name);
         // replace data
 
       } else {
         // append cityName
-        // append data
         $("#forecast").append(cityName)
-      }
-      // for (i = 0; i < response.list.length; i + 8) {
-      //   i = 7;
+
+        // append data, for loop (i = 7; i + 8)
+      // for (i = 7; i < response.list.length; i + 8) {
       //   var fDay = $("<td>").text(response.list[i].dt_txt);
       //   var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
       //   var fWeather = $("<td>").text(weather[0].description).append(fWeatherIcon);
@@ -107,8 +117,9 @@ $(document).ready(function () {
       //   $("#tableForecast").append(tfRow);
       // }
 
+      }
+
     })
-    // for loop, i+8
   }
 
   // city buttons callForecast() for that city
