@@ -32,8 +32,7 @@ td {
 }
 
 .low {
-  background-color: green;
-  color: white;
+  background-color:#5ec771;
 }
 
 .moderate {
@@ -56,4 +55,8 @@ td {
 
 .uvInfo {
   font-size: 14px;
+}
+
+#forecast {
+  display: inline-block;
 }

@@ -39,17 +39,32 @@
     </form>
 
     <section class="row">
-      <div class="col-12">
-        <h2>5-day forecast for your most recent search</h2>
+      <div class="col-12" id="forecast">
+        <h2>5-day forecast for</h2>
       </div>
       <div id="col-12 forecast">
         <!-- forecast for last city searched -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Weather</th>
+              <th scope="col">Temp (°F)</th>
+              <th scope="col">% Hum</th>
+              <th scope="col">Wind (mph)</th>
+            </tr>
+          </thead>
+          <tbody id="tableForecast">
+            <!-- insert forecast info here -->
+          </tbody>
+        </table>
       </div>
 
     </section>
     <!-- retrieved data here, in table form -->
     <section class="row">
       <div class="col-12">
+        <h2>Current conditions</h2>
         <table class="table">
           <thead>
             <tr>
@@ -70,7 +85,6 @@
     <section class="row">
       <div class="col-12">
         <ul class="uvInfo float-right">
-          * Click for color:
             <li>Green = Low</li>
             <li>Yellow = Moderate</li>
             <li>Orange = High</li>
