@@ -1,16 +1,19 @@
 $(document).ready(function () {
   dayjs.extend(window.dayjs_plugin_utc)
 
+
   // on-click event triggers AJAX call
   $("#find-location").on("click", function (e) {
     e.preventDefault();
-
 
     // set "city" variable
     var city = $("#city").val();
 
     // callForecast() as soon as city variable is set
     callForecast(city);
+
+    // pass city data into local storage
+    localStorage.setItem("lastSearched", city);
 
     // API query URL
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=2278d7ef6a3b88793ffca205108a944e";
@@ -25,13 +28,14 @@ $(document).ready(function () {
       method: "GET"
     }).then(function (response) {
 
-      // create table cells
-      var cityButton = $("<button>").text(response.name);
+      // create city buttons
+      var cityButton = $("<button>").text(response.name).addClass("cityBtn");
       var cityTd = $("<td>").append(cityButton);
 
       // use weather icons for current conditions
       var weatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`).addClass("wIcon")
       var currTd = $("<td>").text(response.weather[0].description).append(weatherIcon);
+
       var tempTd = $("<td>").text(response.main.temp);
       var humTd = $("<td>").text(response.main.humidity);
       var windTd = $("<td>").text(response.wind.speed);
@@ -46,7 +50,7 @@ $(document).ready(function () {
       // give API time to respond so lat & lon data populates properly
       setTimeout(function () {
         getUv(lat, lon)
-      }, 25)
+      }, 15)
     })
 
     // get UVI data
@@ -117,23 +121,37 @@ $(document).ready(function () {
 
 
         // append data, use loop (i = 7; i + 8)
-        $(response.list).each(function (i) {
-          var fDay = $("<td>").text(response.list[i].dt_txt);
-          console.log(fDay);
-          // var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
-          // var fWeather = $("<td>").text(response.list[i].weather[0].description).append(fWeatherIcon).attr("id", "forecastWeather");
-          // var fTemp = $("<td>").text(response.list[i].main.temp).attr("id", "forecastTemp");
-          // var fHum = $("<td>").text(response.list[i].main.humidity).attr("id", "forecastHumid");
-          // var fWind = $("<td>").text(response.list[i].wind.speed).attr("id", "forecastWind");
-          // var tfRow = $("<tr>");
-          // tfRow.append(fDay, fWeather, fTemp, fHum, fWind);
-          // $("#tableForecast").append(tfRow);
-        })
+        // $(response.list).each(function (i) {
+        // i = 7;
+        // var fDay = $("<td>").text(response.list[i].dt_txt);
+        // var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
+        // var fWeather = $("<td>").text(response.list[i].weather[0].description).append(fWeatherIcon).attr("id", "forecastWeather");
+        // var fTemp = $("<td>").text(response.list[i].main.temp).val();
+        // console.log(fTemp);
+        // var fHum = $("<td>").text(response.list[i].main.humidity).attr("id", "forecastHumid");
+        // var fWind = $("<td>").text(response.list[i].wind.speed).attr("id", "forecastWind");
+        // var tfRow = $("<tr>");
+        // tfRow.append(fDay, fWeather, fTemp, fHum, fWind);
+        // $("#tableForecast").append(tfRow);
+        // i + 8;
+        // })
 
       }
 
     })
   }
 
+  // retrieve forecast from local storage
+  $("#forecast").val(localStorage.getItem("lastSearched"))
+
+  // retrieve forecast from local storage and set as "city" variable
+  if ("lastSearched" !== null) {
+    var city = localStorage.getItem("lastSearched");
+    console.log(city);
+  }
+  
   // city buttons callForecast() for that city
+  $("button").click(function () {
+    console.log("click");
+  });
 });
