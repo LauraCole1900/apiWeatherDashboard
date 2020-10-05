@@ -101,7 +101,7 @@ $(document).ready(function () {
       var UTCOffset = (dayjs().utcOffset(response.city.timezone / 60).format("ddd, MMM DD, YYYY, hh:mma"));
       var lclTime = $("<h3>").text("Local date & time: " + UTCOffset);
 
-      // check if the forecast city already exists
+      // check if a forecast city already exists
       if ($("#fCityName").length) {
         // replace cityName
         $("#fCityName").text(response.city.name);
@@ -121,37 +121,35 @@ $(document).ready(function () {
 
 
         // append data, use loop (i = 7; i + 8)
+
         // $(response.list).each(function (i) {
-        // i = 7;
+        var i = 7;
         // var fDay = $("<td>").text(response.list[i].dt_txt);
         // var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
         // var fWeather = $("<td>").text(response.list[i].weather[0].description).append(fWeatherIcon).attr("id", "forecastWeather");
-        // var fTemp = $("<td>").text(response.list[i].main.temp).val();
-        // console.log(fTemp);
+        var fTemp = $("<td>").text(response.list[i].main.temp).val();
+        console.log(fTemp);
         // var fHum = $("<td>").text(response.list[i].main.humidity).attr("id", "forecastHumid");
         // var fWind = $("<td>").text(response.list[i].wind.speed).attr("id", "forecastWind");
         // var tfRow = $("<tr>");
         // tfRow.append(fDay, fWeather, fTemp, fHum, fWind);
         // $("#tableForecast").append(tfRow);
         // i + 8;
-        // })
 
       }
 
     })
   }
 
-  // retrieve forecast from local storage
-  $("#forecast").val(localStorage.getItem("lastSearched"))
-
   // retrieve forecast from local storage and set as "city" variable
   if ("lastSearched" !== null) {
     var city = localStorage.getItem("lastSearched");
-    console.log(city);
+    callForecast(city);
   }
-  
+
   // city buttons callForecast() for that city
-  $("button").click(function () {
-    console.log("click");
+  $(document).on("click", "button", function () {
+    var city=$(this).text();
+    callForecast(city);
   });
 });
