@@ -12,7 +12,7 @@ $(document).ready(function () {
     // callForecast() as soon as city variable is set
     callForecast(city);
 
-    // pass city data into local storage
+    // pass last-searched-city data into local storage
     localStorage.setItem("lastSearched", city);
 
     // API query URL
@@ -36,6 +36,7 @@ $(document).ready(function () {
       var weatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`).addClass("wIcon")
       var currTd = $("<td>").text(response.weather[0].description).append(weatherIcon);
 
+      // Temperature, humidity and wind speed variables
       var tempTd = $("<td>").text(response.main.temp);
       var humTd = $("<td>").text(response.main.humidity);
       var windTd = $("<td>").text(response.wind.speed);
@@ -53,15 +54,17 @@ $(document).ready(function () {
       }, 15)
     })
 
-    // get UVI data
-    // append UVI data to table row
+    // Retrieve UVI
     function getUv(lat, lon) {
       var uvData = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=2278d7ef6a3b88793ffca205108a944e";
 
+      // AJAX call for UVI
       $.ajax({
         url: uvData,
         method: "GET"
       }).then(function (response) {
+
+        // UVI variable
         var uvTd = $("<td>").text(response.value).attr("id", "uvi");
 
         // put UVI into table cell 
@@ -90,7 +93,7 @@ $(document).ready(function () {
   // call forecast data
   // append forecast data to table cells
   function callForecast(city) {
-    var forecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=2278d7ef6a3b88793ffca205108a944e`;
+    var forecast = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=5&units=imperial&appid=166a433c57516f51dfab1f7edaed8413`;
 
     $.ajax({
       url: forecast,
@@ -118,27 +121,29 @@ $(document).ready(function () {
         // append local time
         $("#localTime").append(lclTime);
 
-
-
         // append data, use loop (i = 7; i + 8)
+        $(response.list).each(function (i) {
+          var fDay = $("<td>").text(response.list[i].dt);
 
-        // $(response.list).each(function (i) {
-        var i = 7;
-        // var fDay = $("<td>").text(response.list[i].dt_txt);
-        // var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
-        // var fWeather = $("<td>").text(response.list[i].weather[0].description).append(fWeatherIcon).attr("id", "forecastWeather");
-        var fTemp = $("<td>").text(response.list[i].main.temp).val();
-        console.log(fTemp);
-        // var fHum = $("<td>").text(response.list[i].main.humidity).attr("id", "forecastHumid");
-        // var fWind = $("<td>").text(response.list[i].wind.speed).attr("id", "forecastWind");
-        // var tfRow = $("<tr>");
-        // tfRow.append(fDay, fWeather, fTemp, fHum, fWind);
-        // $("#tableForecast").append(tfRow);
-        // i + 8;
+          var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
 
+          var fWeather = $("<td>").text(response.list[i].weather[0].description).append(fWeatherIcon).attr("id", "forecastWeather");
+
+          var fTempMax = $("<td>").text(response.list[i].temp.max);
+
+          var fTempMin = $("<td>").text(response.list[i].temp.min);
+
+          var fHum = $("<td>").text(response.list[i].humidity).attr("id", "forecastHumid");
+
+          var fWind = $("<td>").text(response.list[i].speed).attr("id", "forecastWind");
+
+          var tfRow = $("<tr>");
+
+          tfRow.append(fDay, fWeather, fTempMax, fTempMin, fHum, fWind);
+          $("#tableForecast").append(tfRow);
+        })
       }
-
-    })
+    });
   }
 
   // retrieve forecast from local storage and set as "city" variable
@@ -147,9 +152,9 @@ $(document).ready(function () {
     callForecast(city);
   }
 
-  // city buttons callForecast() for that city
+  // clicking city buttons callForecast() for that city
   $(document).on("click", "button", function () {
-    var city=$(this).text();
+    var city = $(this).text();
     callForecast(city);
   });
 });
