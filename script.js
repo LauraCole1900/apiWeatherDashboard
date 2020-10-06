@@ -92,7 +92,7 @@ $(document).ready(function () {
   // call forecast data
   // append forecast data to table cells
   function callForecast(city) {
-    var forecast = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=5&units=imperial&appid=166a433c57516f51dfab1f7edaed8413`;
+    var forecast = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=6&units=imperial&appid=166a433c57516f51dfab1f7edaed8413`;
 
     $.ajax({
       url: forecast,
@@ -129,33 +129,44 @@ $(document).ready(function () {
   };
 
 
+  // function to populate forecast data
   function populateForecast(response) {
-    console.log(response);
     // append data, use loop
     $(response.list).each(function (i) {
-      // convert unix to MDT
-      var date = new Date(response.list[i].dt * 1000);
-      let month = (date.getMonth() + 1).toString().padStart(2, "0");
-      let day = date.getDate().toString().padStart(2,"0");
-      // insert MDT dates into forecast table
-      var fDay = $("<td>").text(month + "/" + day);
+      if (i > 0) {
+        // convert unix to MDT
+        var dateObject = new Date(response.list[i].dt * 1000);
+        var humanDateFormat = dateObject.toLocaleString();
 
-      var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
+        // convert UTC to local time
+        var forecastTime = (dayjs(humanDateFormat).utcOffset(response.city.timezone / 60).format("ddd, MMM DD"));
 
-      var fWeather = $("<td>").text(response.list[i].weather[0].description).append(fWeatherIcon).attr("id", "forecastWeather");
+        // insert localtime & dates into forecast table
+        var fDay = $("<td>").text(forecastTime);
 
-      var fTempMax = $("<td>").text(response.list[i].temp.max);
+        // current weather conditions and icon
+        var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
+        var fWeather = $("<td>").text(response.list[i].weather[0].description).append(fWeatherIcon).attr("id", "forecastWeather");
 
-      var fTempMin = $("<td>").text(response.list[i].temp.min);
+        // high temperature
+        var fTempMax = $("<td>").text(response.list[i].temp.max);
 
-      var fHum = $("<td>").text(response.list[i].humidity).attr("id", "forecastHumid");
+        // low temperature
+        var fTempMin = $("<td>").text(response.list[i].temp.min);
 
-      var fWind = $("<td>").text(response.list[i].speed).attr("id", "forecastWind");
+        // relative humidity
+        var fHum = $("<td>").text(response.list[i].humidity).attr("id", "forecastHumid");
 
-      var tfRow = $("<tr>");
+        // wind speed
+        var fWind = $("<td>").text(response.list[i].speed).attr("id", "forecastWind");
 
-      tfRow.append(fDay, fWeather, fTempMax, fTempMin, fHum, fWind);
-      $("#tableForecast").append(tfRow);
+        // table row
+        var tfRow = $("<tr>");
+
+        // append above to forecast
+        tfRow.append(fDay, fWeather, fTempMax, fTempMin, fHum, fWind);
+        $("#tableForecast").append(tfRow);
+      }
     });
   };
 
