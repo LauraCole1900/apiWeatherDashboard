@@ -84,7 +84,6 @@ $(document).ready(function () {
         }
       });
     }
-
     // append table row at the top of the table body
     $("tbody").prepend(tRow);
   });
@@ -99,8 +98,13 @@ $(document).ready(function () {
       url: forecast,
       method: "GET"
     }).then(function (response) {
-      console.log(response);
+      // empty forecast data
+      $("#tableForecast").empty();
+
+      // set forecast city name
       var cityName = $("<h2>").text(response.city.name).attr("id", "fCityName");
+
+      // set forecast local time
       var UTCOffset = (dayjs().utcOffset(response.city.timezone / 60).format("ddd, MMM DD, YYYY, hh:mma"));
       var lclTime = $("<h3>").text("Local date & time: " + UTCOffset);
 
@@ -112,8 +116,6 @@ $(document).ready(function () {
         //replace local time
         $("#localTime").text("Local date & time: " + UTCOffset);
 
-        // replace data
-
       } else {
         // append cityName
         $("#forecast").append(cityName);
@@ -121,30 +123,42 @@ $(document).ready(function () {
         // append local time
         $("#localTime").append(lclTime);
 
-        // append data, use loop (i = 7; i + 8)
-        $(response.list).each(function (i) {
-          var fDay = $("<td>").text(response.list[i].dt);
-
-          var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
-
-          var fWeather = $("<td>").text(response.list[i].weather[0].description).append(fWeatherIcon).attr("id", "forecastWeather");
-
-          var fTempMax = $("<td>").text(response.list[i].temp.max);
-
-          var fTempMin = $("<td>").text(response.list[i].temp.min);
-
-          var fHum = $("<td>").text(response.list[i].humidity).attr("id", "forecastHumid");
-
-          var fWind = $("<td>").text(response.list[i].speed).attr("id", "forecastWind");
-
-          var tfRow = $("<tr>");
-
-          tfRow.append(fDay, fWeather, fTempMax, fTempMin, fHum, fWind);
-          $("#tableForecast").append(tfRow);
-        })
-      }
+      };
+      populateForecast(response);
     });
-  }
+  };
+
+
+  function populateForecast(response) {
+    console.log(response);
+    // append data, use loop
+    $(response.list).each(function (i) {
+      // convert unix to MDT
+      var date = new Date(response.list[i].dt * 1000);
+      let month = (date.getMonth() + 1).toString().padStart(2, "0");
+      let day = date.getDate().toString().padStart(2,"0");
+      // insert MDT dates into forecast table
+      var fDay = $("<td>").text(month + "/" + day);
+
+      var fWeatherIcon = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png`).addClass("wIcon");
+
+      var fWeather = $("<td>").text(response.list[i].weather[0].description).append(fWeatherIcon).attr("id", "forecastWeather");
+
+      var fTempMax = $("<td>").text(response.list[i].temp.max);
+
+      var fTempMin = $("<td>").text(response.list[i].temp.min);
+
+      var fHum = $("<td>").text(response.list[i].humidity).attr("id", "forecastHumid");
+
+      var fWind = $("<td>").text(response.list[i].speed).attr("id", "forecastWind");
+
+      var tfRow = $("<tr>");
+
+      tfRow.append(fDay, fWeather, fTempMax, fTempMin, fHum, fWind);
+      $("#tableForecast").append(tfRow);
+    });
+  };
+
 
   // retrieve forecast from local storage and set as "city" variable
   if ("lastSearched" !== null) {
