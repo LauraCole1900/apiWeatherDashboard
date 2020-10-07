@@ -8,15 +8,18 @@ $(document).ready(function () {
 
   // loops through savedCities array and builds a button for each
   function renderButtons() {
+    savedCities = JSON.parse(localStorage.getItem("savedCities"));
+    $("#history").empty();
     $(savedCities).each(function (i) {
-      $("#history").empty();
       var historyButton = $("<button>").text(savedCities[i]).addClass("cityBtn");
-      $("#history").append(historyButton);
+      $("#history").append(historyButton).append("<br />");
     })
   }
 
   // call function for information coming out of local storage
-  renderButtons();
+  if (localStorage.getItem("savedCities") !== null) {
+    renderButtons();
+  }
 
   // When a new city is added, update the array, update local storage (use JSON.stringify), call renderButtons() again
 
@@ -31,14 +34,15 @@ $(document).ready(function () {
     // add last-searched-city data into savedCities[]
     savedCities.push(city);
 
+    // throw savedCities[] into localStorage
+    localStorage.setItem("lastSearched", city);
+    localStorage.setItem("savedCities", JSON.stringify(savedCities));
+
     // callForecast() as soon as city variable is set
     callForecast(city);
 
     // render history buttons with new user input
     renderButtons();
-
-    // pass last-searched-city data into local storage
-    localStorage.setItem("lastSearched", city);
 
     // API query URL
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=2278d7ef6a3b88793ffca205108a944e";
