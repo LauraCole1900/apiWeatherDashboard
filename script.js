@@ -85,7 +85,7 @@ $(document).ready(function () {
 
     // Retrieve UVI
     function getUv(lat, lon) {
-      var uvData = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=2278d7ef6a3b88793ffca205108a944e";
+      var uvData = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=2278d7ef6a3b88793ffca205108a944e";
 
       // AJAX call for UVI
       $.ajax({
