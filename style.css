@@ -31,6 +31,25 @@ td {
   vertical-align: middle;
 }
 
+.card {
+  padding: 3px;
+  background-color: #189bff;
+}
+
+.card-header {
+  color: white;
+  text-align: center;
+}
+
+.cityBtn {
+  background-color: yellow;
+  border: 3px solid #ffdf3e;
+  border-radius: 12px;
+  color: black;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
 .wIcon {
   height: 40px;
 }

@@ -1,6 +1,27 @@
 $(document).ready(function () {
   dayjs.extend(window.dayjs_plugin_utc)
+  var savedCities = [];
 
+  // check local storage and see if cities have been saved
+
+  // if there are saved cities, JSON.parse that data, and replace savedCities array
+  if (savedCities) {
+    // savedCities = JSON.parse(localStorage.getItem());
+  }
+
+  // loops through savedCities array and builds a button for each
+  function renderButtons() {
+    $(savedCities).each(function (i) {
+      $("#history").empty();
+      var historyButton = $("<button>").text(savedCities[i]).addClass("cityBtn");
+      $("#history").append(historyButton);
+    })
+  }
+
+  // call function for information coming out of local storage
+  renderButtons();
+
+  // When a new city is added, update the array, update local storage (use JSON.stringify), call renderButtons() again
 
   // on-click event triggers AJAX call
   $("#find-location").on("click", function (e) {
@@ -9,8 +30,14 @@ $(document).ready(function () {
     // set "city" variable
     var city = $("#city").val();
 
+    // add last-searched-city data into savedCities[]
+    savedCities.push(city);
+
     // callForecast() as soon as city variable is set
     callForecast(city);
+
+    // render history buttons with new user input
+    renderButtons();
 
     // pass last-searched-city data into local storage
     localStorage.setItem("lastSearched", city);
