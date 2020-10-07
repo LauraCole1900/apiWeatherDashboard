@@ -5,9 +5,6 @@ $(document).ready(function () {
   // check local storage and see if cities have been saved
 
   // if there are saved cities, JSON.parse that data, and replace savedCities array
-  if (savedCities) {
-    // savedCities = JSON.parse(localStorage.getItem());
-  }
 
   // loops through savedCities array and builds a button for each
   function renderButtons() {
@@ -29,6 +26,7 @@ $(document).ready(function () {
 
     // set "city" variable
     var city = $("#city").val();
+    $("#city").val("");
 
     // add last-searched-city data into savedCities[]
     savedCities.push(city);

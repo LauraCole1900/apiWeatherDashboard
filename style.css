@@ -34,18 +34,15 @@ td {
 .card {
   padding: 3px;
   background-color: #189bff;
-}
-
-.card-header {
-  color: white;
   text-align: center;
+  color: white;
 }
 
 .cityBtn {
-  background-color: yellow;
+  background-color: #189bff;
   border: 3px solid #ffdf3e;
   border-radius: 12px;
-  color: black;
+  color: white;
   text-align: center;
   margin-bottom: 5px;
 }
