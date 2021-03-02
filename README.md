@@ -36,7 +36,8 @@ User input form:
 ![User input form](assets/dashboard-user-input.png)
 
 Clickable buttons to repeat a search:
-![City buttons](assets/dashboard-history-buttons.png)
+
+<img src="assets/dashboard-history-buttons.png" alt="City buttons" width="90px">
 
 Dashboard with a search repeated from clicking one of the city buttons:
 ![Dashboard history search](assets/dashboard-history-forecast.png)
