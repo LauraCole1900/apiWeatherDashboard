@@ -1,13 +1,31 @@
-body {
-background-color: #bde2ff;
-font-family: 'Montserrat', sans-serif;
+:root {
+  --white: #ffffff;
+  --red: #ff0000;
+  --orange: #ffa500;
+  --gold: #ffdf3e;
+  --yellow: #ffff00;
+  --green: #5ec771;
+  --ltBlue: #bde2ff;
+  --medBlue: #189bff;
+  --purple: #8d31ff;
+  --myFont: "Montserrat", sans-serif;
 }
 
+body {
+  background-color: var(--ltBlue);
+}
+
+body,
 header {
-  background-color: #189bff;
-  color: white;
+  font-family: var(--myFont);
+}
+
+header,
+.card,
+.cityBtn {
+  background-color: var(--medBlue);
+  color: var(--white);
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
 }
 
 img {
@@ -33,17 +51,11 @@ td {
 
 .card {
   padding: 3px;
-  background-color: #189bff;
-  text-align: center;
-  color: white;
 }
 
 .cityBtn {
-  background-color: #189bff;
-  border: 3px solid #ffdf3e;
+  border: 3px solid var(--gold);
   border-radius: 12px;
-  color: white;
-  text-align: center;
   margin-bottom: 5px;
 }
 
@@ -52,25 +64,25 @@ td {
 }
 
 .low {
-  background-color:#5ec771;
+  background-color: var(--green);
 }
 
 .moderate {
-  background-color: yellow;
+  background-color: var(--yellow);
 }
 
 .high {
-  background-color: orange;
+  background-color: var(--orange);
 }
 
 .very_high {
-  background-color: red;
-  color: white;
+  background-color: var(--red);
+  color: var(--white);
 }
 
 .extreme {
-  background-color: #8d31ff;
-  color: white;
+  background-color: var(--purple);
+  color: var(--white);
 }
 
 .info {
