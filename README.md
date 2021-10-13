@@ -90,4 +90,4 @@ If you have further questions, you can reach me at lauracole1900@comcast.net. Fo
 
 ## Badges
 
-![License badge](https://img.shields.io/badge/license-MIT-189bff) [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/LauraCole1900/apiWeatherDashboard)
+[![License badge](https://img.shields.io/badge/license-MIT-189bff)](./LICENSE) [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/LauraCole1900/apiWeatherDashboard)
