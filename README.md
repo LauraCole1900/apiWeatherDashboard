@@ -68,6 +68,7 @@ This project is intended to be used to allow the user to see forecast and curren
 ## Technologies Used
 
 [![HTML5](https://img.shields.io/badge/built%20with-HTML5-f06529)](https://developer.mozilla.org/en-US/docs/Glossary/HTML5) [![CSS3](https://img.shields.io/badge/built%20with-CSS3-2965f1)](https://developer.mozilla.org/en-US/docs/Web/CSS) [![jQuery](https://img.shields.io/badge/built%20with-jQuery-0769ad)](https://jquery.com/) [![Bootstrap](https://img.shields.io/badge/built%20with-Bootstrap-563d7c)](https://getbootstrap.com/) [![Day.js](https://img.shields.io/badge/built%20with-Day.js-dd6655)](https://day.js.org/) [![OpenWeather API](https://img.shields.io/badge/built%20with-OpenWeather-cd7354)](https://openweathermap.org/) [![Local Storage](https://img.shields.io/badge/built%20with-local%20storage-e34c26)](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+
 ## Tests
 
 npm run test
