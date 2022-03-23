@@ -49,8 +49,20 @@ td {
   vertical-align: middle;
 }
 
+#clearHist {
+  color: var(--ltBlue);
+  font-size: .75rem;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
 .card {
   padding: 3px;
+}
+
+.centered {
+  text-align: center;
+  width:6rem;
 }
 
 .cityBtn {

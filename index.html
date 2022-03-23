@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
   <title>Weather Dashboard</title>
 </head>
 
@@ -17,28 +17,26 @@
     <header>
       <div class="row">
         <div class="col-2">
-          <img src="assets/367527 - pointy sun (64).png" alt="pointy sun icon" class="float-left" />
+          <img src="assets/images/367527 - pointy sun (64).png" alt="pointy sun icon" class="float-left" />
         </div>
         <div class="col-8">
           <h1>Weather Dashboard</h1>
         </div>
         <div class="col-2">
-          <img src="assets/367519 - cloud rain raincloud (64).png" alt="rainy cloud icon" class="float-right" />
+          <img src="assets/images/367519 - cloud rain raincloud (64).png" alt="rainy cloud icon" class="float-right" />
         </div>
       </div>
     </header>
     <!-- user input -->
     <br />
     <form id="location">
-      <label for="city">City*, Country:</label>
+      <label for="city">City:</label>
       <input type="text" id="city">
 
       <!-- Submit location info and trigger AJAX call -->
       <input id="find-location" type="submit" value="Find weather">
 
     </form>
-    <p class="info">City name required<br />
-      Country name optional</p>
 
     <section class="row">
       <div class="col-4">
@@ -53,6 +51,7 @@
       <aside class="card">
         <div class="card-header">
           History
+          <p id="clearHist">Clear History</p>
         </div>
         <div id="history">
           <!-- search-history buttons, populate from array -->
@@ -93,7 +92,7 @@
               <th scope="col">UV Index*</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="tableCurrent">
             <!-- append searched info here -->
           </tbody>
         </table>
@@ -101,14 +100,28 @@
     </section>
     <section class="row">
       <div class="col-12">
-        <ul class="info float-right">
+        <div class="info float-right">
           * UV Risk Level
-          <li>Green = Low</li>
-          <li>Yellow = Moderate</li>
-          <li>Orange = High</li>
-          <li>Red = Very High</li>
-          <li>Violet = Extreme</li>
-        </ul>
+          <table>
+            <tbody>
+              <tr>
+              <td class="low centered">Low</td>
+              </tr>
+              <tr>
+              <td class="moderate centered">Moderate</td>
+              </tr>
+              <tr>
+              <td class="high centered">High</td>
+              </tr>
+              <tr>
+              <td class="very_high centered">Very High</td>
+              </tr>
+              <tr>
+              <td class="extreme centered">Extreme</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         </ul>
       </div>
     </section>
@@ -119,7 +132,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
   <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
-  <script src="script.js" type="text/javascript"></script>
+  <script src="./assets/js/script.js" type="text/javascript"></script>
 </body>
 
 </html>

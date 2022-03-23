@@ -27,23 +27,23 @@ Forecast conditions include date, weather, high and low temperatures in Fahrenhe
 ## Screenshots
 
 Blank dashboard:
-![Dashboard](assets/dashboard-blank.png)
+![Dashboard](assets/images/dashboard-blank.png)
 
 Dashboard with cities entered:
-![Dashboard with search history](assets/dashboard-searched.png)
+![Dashboard with search history](assets/images/dashboard-searched.png)
 
 User input form:
-![User input form](assets/dashboard-user-input.png)
+![User input form](assets/images/dashboard-user-input.png)
 
 Clickable buttons to repeat a search:
 
-<img src="assets/dashboard-history-buttons.png" alt="City buttons" width="90px">
+<img src="assets/images/dashboard-history-buttons.png" alt="City buttons" width="90px">
 
 Dashboard with a search repeated from clicking one of the city buttons:
-![Dashboard history search](assets/dashboard-history-forecast.png)
+![Dashboard history search](assets/images/dashboard-history-forecast.png)
 
 Dashboard upon reload:
-![Dashboard on reload](assets/dashboard-reload.png)
+![Dashboard on reload](assets/images/dashboard-reload.png)
 
 ## Installation Instructions
 
@@ -91,4 +91,4 @@ If you have further questions, you can reach me at lauracole1900@comcast.net. Fo
 
 ## Badges
 
-[![License badge](https://img.shields.io/badge/license-MIT-189bff)](./LICENSE) [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/LauraCole1900/apiWeatherDashboard)
+[![License badge](https://img.shields.io/badge/license-MIT-189bff)](./LICENSE)

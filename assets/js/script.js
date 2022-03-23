@@ -45,7 +45,7 @@ $(document).ready(function () {
     renderButtons();
 
     // API query URL
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=2278d7ef6a3b88793ffca205108a944e";
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=2278d7ef6a3b88793ffca205108a944e`;
 
     // set table row variable
     var tRow = $("<tr>");
@@ -85,7 +85,7 @@ $(document).ready(function () {
 
     // Retrieve UVI
     function getUv(lat, lon) {
-      var uvData = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=2278d7ef6a3b88793ffca205108a944e";
+      var uvData = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=2278d7ef6a3b88793ffca205108a944e`;
 
       // AJAX call for UVI
       $.ajax({
@@ -114,7 +114,7 @@ $(document).ready(function () {
       });
     }
     // append table row at the top of the table body
-    $("tbody").prepend(tRow);
+    $("#tableCurrent").prepend(tRow);
   });
 
 
@@ -135,7 +135,7 @@ $(document).ready(function () {
 
       // set forecast local time
       var UTCOffset = (dayjs().utcOffset(response.city.timezone / 60).format("ddd, MMM DD, YYYY, hh:mma"));
-      var lclTime = $("<h3>").text("Local date & time: " + UTCOffset);
+      var lclTime = $("<h3>").html(`Local date & time:<br />${UTCOffset}`);
 
       // check if a forecast city already exists
       if ($("#fCityName").length) {
@@ -143,7 +143,7 @@ $(document).ready(function () {
         $("#fCityName").text(response.city.name);
 
         //replace local time
-        $("#localTime").text("Local date & time: " + UTCOffset);
+        $("#localTime").html(`Local date & time:<br />${UTCOffset}`);
 
       } else {
         // append cityName
@@ -205,6 +205,11 @@ $(document).ready(function () {
     var city = localStorage.getItem("lastSearched");
     callForecast(city);
   }
+
+  $("#clearHist").on("click", function() {
+    localStorage.clear();
+    location.reload();
+  })
 
   // clicking city buttons callForecast() for that city
   $(document).on("click", "button", function () {
